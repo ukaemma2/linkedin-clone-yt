@@ -1,17 +1,15 @@
 import React from 'react';
 import Header from './header';
-import SideBar from './SideBar'
+import SideBar from './Sidebar.jsx'
 
 
 function App() {
   return (
-    <div className="App">
-      <h5> </h5>
-      
+    <div className="app">
       
       <Header/>
       {/* app body */}
-      <div className="app_-body">
+      <div className="app_body">
         <SideBar />
 
       {/* Fead */}

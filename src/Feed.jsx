@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './Feed.css'
 import {
     Create,
@@ -8,10 +8,29 @@ import {
     CalendarViewDay
 } from '@material-ui/icons'
 import InputOption from './InputOption'
-import Post from './Post'
+import Post from './Post';
+import { db } from  './firebase.jsx';
+
 
 const Feed = () => {
-    const {post, setPost} = useState([])
+    const {posts, setPost} = useState([])
+
+    useEffect(() => {
+        db.collection('posts').onSnapshot(snapshot =>
+            setPost(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data()
+                }))
+            )
+        ) 
+    }, [])
+    const sendPost = (e) => {
+        e.preventDefault()
+        
+
+        
+    }
     return (
         <div className="feed">
             <div className="feed_inputContainer">
@@ -19,7 +38,7 @@ const Feed = () => {
                     <Create />
                     <form action="">
                         <input type="text" />
-                        <button type="submit">Send</button>
+                        <button onClick={sendPost} type="submit">Send</button>
                     </form>
                 </div>
                 <div className="feed_inputOption">
@@ -29,14 +48,17 @@ const Feed = () => {
                     <InputOption Icon={CalendarViewDay} title="Write article" color="#7FC15E" />
                 </div>
             </div>
-            {/* post */}
+            {/* post
+            {posts.map((post) => {
+
+            })} */}
             <Post 
                 name="Ukah Emmanuel Ogbonna" 
                 description="This is a test"
                 message="We want this to workout for us"
             />
         </div>
-    )
+    ) 
 }
 
 export default Feed

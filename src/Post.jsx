@@ -26,7 +26,7 @@ const Post = (props) => {
                 <InputOption Icon={SendOutlined}  title="Send" color="gray"/>
             </div>
         </div>
-    )
+    ) 
 }
 
 export default Post

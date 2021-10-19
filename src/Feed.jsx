@@ -9,36 +9,31 @@ import {
     Subscriptions,
     EventNote,
     CalendarViewDay
-} from '@material-ui/icons'
-import InputOption from './InputOption'
+} from '@material-ui/icons';
+import InputOption from './InputOption';
 import Post from './Post';
 import { db } from  './firebase';
 
 
 const Feed = () => {
-    const {input, setInput} = useState('')
-    const {posts, setPost} = useState([])
+    
+    const { input, setValue } = useState('');
+    const { posts, setPosts } = useState([]);
  
     useEffect(() => {
-        db.collection('posts').onSnapshot(snapshot =>
-            setPost(
-                snapshot.docs && snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    data: doc.data()
-                }))
-            )
-        )
-        db.collection("posts").where("posts", "==", true)
-            .get()
-            .then((querySnapshot) => {
-               setPost( querySnapshot.forEach((doc) => {
-                  
-            })) 
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-    }, [setPost])
+      const getPosts =  db.collection('posts')
+      .orderBy('timestamp', 'asc') // append at the top
+      .onSnapshot((snapshot) => {
+            setPosts(
+                snapshot.docs && snapshot.docs.map(doc => {
+                   return {id: doc.id, data: doc.data()}
+                })
+            );
+        });
+        return () => {
+            getPosts()
+        }
+    }, [])
     const sendPost = (e) => {
         e.preventDefault()
         db.collection('posts').add({
@@ -49,24 +44,28 @@ const Feed = () => {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         })
     }
+    const handleChange = e => {
+		setValue(e.target.value)
+	}
     return (
         <div className="feed">
             <div className="feed_inputContainer">
                 <div className="feed_input">
                     <Create />
                     <form action="">
-                        <input value={input} onChange={(e) => setInput(e.target.value)} type="text" />
+                        <input 
+                        value={input} 
+                        onChange={handleChange} type="text" />
                         <button onClick={sendPost} type="submit">Send</button>
                     </form>
                 </div>
                 <div className="feed_inputOption">
                     <InputOption Icon={Image} title="Photo" color="#70B5F9" />
-                    <InputOption Icon={Subscriptions } title="Video" color="#E7A33E" />
+                    <InputOption Icon={Subscriptions} title="Video" color="#E7A33E" />
                     <InputOption Icon={EventNote} title="Event" color="#COCBCD" />
                     <InputOption Icon={CalendarViewDay} title="Write article" color="#7FC15E" />
                 </div>
             </div>
-            post
             {posts && posts.map(({id, data: {name, description, message, photoUrl}}) => {
               return  <Post 
                 key={id}

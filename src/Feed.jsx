@@ -17,12 +17,12 @@ import { db } from  './firebase';
 
 const Feed = () => {
     
-    const { input, setValue } = useState('');
-    const { posts, setPosts } = useState([]);
+    const  [input, setValue]  = useState('');
+    const  [posts, setPosts]  = useState([]);
  
     useEffect(() => {
       const getPosts =  db.collection('posts')
-      .orderBy('timestamp', 'asc') // append at the top
+      .orderBy('timestamp', 'desc') // append at the top
       .onSnapshot((snapshot) => {
             setPosts(
                 snapshot.docs && snapshot.docs.map(doc => {
@@ -75,11 +75,6 @@ const Feed = () => {
                 photoUrl={photoUrl}
               />
             })}
-            <Post 
-                name="Ukah Emmanuel Ogbonna" 
-                description="This is a test"
-                message="We want this to workout for us"
-            />
         </div>
     )
 }

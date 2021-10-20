@@ -12,12 +12,12 @@ const Post = (props) => {
             <div className="post_header">
                 <Avatar />
                 <div className="post_lafs">
-                    <h2>Emmydon</h2>
-                    <p>Description</p>
+                    <h2>{name}</h2>
+                    <p>{description}</p>
                 </div>
             </div>
             <div className="post_body">
-                <p>Message goes here</p>
+                <p>{message}</p>
             </div>
             <div className="post_button">
                 <InputOption Icon={ThumbUpOutlined}  title="like" color="gray"/>

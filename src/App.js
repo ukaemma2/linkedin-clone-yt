@@ -1,5 +1,5 @@
 import React from 'react';
-import Feed from './Feed';
+import Feed from './Feed.jsx';
 import Header from './header';
 import SideBar from './Sidebar.jsx'
 

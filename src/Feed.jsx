@@ -42,7 +42,8 @@ const Feed = () => {
             message: input,
             photoUrl: '',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
+        });
+        setValue('')
     }
     const handleChange = e => {
 		setValue(e.target.value)
@@ -54,8 +55,9 @@ const Feed = () => {
                     <Create />
                     <form action="">
                         <input 
-                        value={input} 
-                        onChange={handleChange} type="text" />
+                            value={input} 
+                            onChange={handleChange} type="text" 
+                        />
                         <button onClick={sendPost} type="submit">Send</button>
                     </form>
                 </div>

@@ -4,7 +4,7 @@ import Login from './Login.jsx';
 import Header from './header';
 import SideBar from './Sidebar.jsx'
 import { useDispatch, useSelector } from 'react-redux';
-import { login, selectUser } from "./features/userSlice";
+import { login, logout, selectUser } from "./features/userSlice";
 import { auth } from './firebase.js';
 
 
@@ -20,8 +20,10 @@ function App() {
             email: userAuth.email,
             uid: userAuth.uid,
             displayName: userAuth.displayName,
-            photoUrl: userAuth.photoUrl
+            photoUrl: userAuth.photoURL
         }))
+      }else{
+        dispatch(logout())
       }
     })
   }, [])

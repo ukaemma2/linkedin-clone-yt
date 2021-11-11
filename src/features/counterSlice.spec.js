@@ -1,6 +1,6 @@
 import counterReducer, {
-  increment,
-  decrement,
+  login,
+  logout,
   incrementByAmount,
 } from './userSlice';
 
@@ -16,13 +16,13 @@ describe('counter reducer', () => {
     });
   });
 
-  it('should handle increment', () => {
-    const actual = counterReducer(initialState, increment());
+  it('should handle login', () => {
+    const actual = counterReducer(initialState, login());
     expect(actual.value).toEqual(4);
   });
 
-  it('should handle decrement', () => {
-    const actual = counterReducer(initialState, decrement());
+  it('should handle logout', () => {
+    const actual = counterReducer(initialState, logout());
     expect(actual.value).toEqual(2);
   });
 

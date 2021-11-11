@@ -6,8 +6,18 @@ import ChatIcon from '@material-ui/icons/Chat';
 import SuppervisorAcountIcon from '@material-ui/icons/Group';
 import Logo from './assets/image/linkedin-icon-2.svg'
 import HeaderOptions from './HeaderOptions.jsx'
+import React from "react";
+import { useDispatch } from 'react-redux'
 import "./Header.css"
-function header() {
+import { logout } from './features/userSlice';
+import { auth } from './firebase';
+function Header() {
+    const dispatch = useDispatch()
+
+    const logoutOfApp = () => {
+        dispatch(logout());
+        auth.signOut();
+    }
     return (
         <div className="header">
             <div className="header_left">
@@ -23,9 +33,13 @@ function header() {
                 <HeaderOptions Icon={BusinessCenterIcon} title="Job"/>
                 <HeaderOptions Icon={ChatIcon} title="Messaging"/>
                 <HeaderOptions Icon={Notification} title="Notifications"/>
-                <HeaderOptions avatar="https://compassionate-leakey-e9b16b.netlify.app/images/IG_Sonny.jpeg" title="me" />
+                <HeaderOptions 
+                    avatar="https://compassionate-leakey-e9b16b.netlify.app/images/IG_Sonny.jpeg" 
+                    title="me" 
+                    onClick={logoutOfApp} 
+                />
             </div>
         </div>
     )
 }
-export default header
+export default Header

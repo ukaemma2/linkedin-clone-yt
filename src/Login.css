@@ -36,8 +36,9 @@
   font-weight: 800;
   background: rgb(101, 215, 250);
 }
-.login_registering {
-  color: #0177b7
+.login_registering { 
+  color: #0177b7;
+  cursor: pointer;
 }
 .login > form > p {
   text-align: center;

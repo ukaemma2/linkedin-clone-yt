@@ -32,15 +32,18 @@ const Login = () => {
   };
   const loginForm = e => {
   e.preventDefault()
-   auth.signInWithEmailAndPassword(email,password).then((userAuth) => {
-     dispatch(login({
-      email: userAuth.user.email,
-      uid: userAuth.user.uid,
-      displayName: userAuth.user.displayName,
-      photoUrl: userAuth.user.photoURL,
-     }))
-   })
-   
+    auth
+      .signInWithEmailAndPassword(email,password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+            photoUrl: userAuth.user.photoURL,
+          })
+        )
+      }).catch(error => alert(error))
   };
   return (
     <div>

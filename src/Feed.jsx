@@ -13,17 +13,20 @@ import {
 import InputOption from './InputOption';
 import Post from './Post';
 import { db } from  './firebase';
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 
 const Feed = () => {
     
     const  [input, setValue]  = useState('');
     const  [posts, setPosts]  = useState([]);
+    const user = useSelector(selectUser)
  
     useEffect(() => {
-      const getPosts =  db.collection('posts')
-      .orderBy('timestamp', 'desc') // append at the top
-      .onSnapshot((snapshot) => {
+        const getPosts =  db.collection('posts')
+        .orderBy('timestamp', 'desc') // append at the top
+        .onSnapshot((snapshot) => {
             setPosts(
                 snapshot.docs && snapshot.docs.map(doc => {
                    return {id: doc.id, data: doc.data()}
@@ -37,10 +40,10 @@ const Feed = () => {
     const sendPost = (e) => {
         e.preventDefault()
         db.collection('posts').add({
-            name: 'Ukah Emmanuel Ogbonna',
-            description: 'This is test',
+            name: user.displayName,
+            description: user.email,
             message: input,
-            photoUrl: '',
+            photoUrl: user.photoUrl || '',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         setValue('')

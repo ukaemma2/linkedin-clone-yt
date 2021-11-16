@@ -19,7 +19,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar_top">
         <img src={Bg} alt="bg" />
-        <Avatar className="sidebar_avatar"/>
+        <Avatar className="sidebar_avatar" >{user.photoUrl}</Avatar>
         <h2>{user.displayName}</h2> 
         <h4>{user.email}</h4>
       </div>

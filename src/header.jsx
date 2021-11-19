@@ -34,7 +34,6 @@ function Header() {
                 <HeaderOptions Icon={ChatIcon} title="Messaging"/>
                 <HeaderOptions Icon={Notification} title="Notifications"/>
                 <HeaderOptions 
-                    avatar="https://compassionate-leakey-e9b16b.netlify.app/images/IG_Sonny.jpeg" 
                     title="me" 
                     onClick={logoutOfApp} 
                 />

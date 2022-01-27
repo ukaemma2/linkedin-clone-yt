@@ -26,17 +26,14 @@ function Header() {
                     <SearchIcon/>
                     <input type="text"/>
                 </div>
-            </div> 
+            </div>
             <div className="header_right">
                 <HeaderOptions Icon={HomeIcon} title="Home"/>
                 <HeaderOptions Icon={SuppervisorAcountIcon} title="My Network" />
                 <HeaderOptions Icon={BusinessCenterIcon} title="Job"/>
                 <HeaderOptions Icon={ChatIcon} title="Messaging"/>
                 <HeaderOptions Icon={Notification} title="Notifications"/>
-                <HeaderOptions 
-                    title="me" 
-                    onClick={logoutOfApp} 
-                />
+                <HeaderOptions title="me" onClick={logoutOfApp} />
             </div>
         </div>
     )

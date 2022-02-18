@@ -74,7 +74,7 @@
     font-size: 12px;
     font-weight: 400;
 }
-.widgets {
+ .widgets {
     position: sticky !important;
     top: 0;
     flex: 0.2;

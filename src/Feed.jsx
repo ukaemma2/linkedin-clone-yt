@@ -25,7 +25,7 @@ const Feed = () => {
     const user = useSelector(selectUser)
  
     useEffect(() => {
-        const getPosts =  db.collection('posts')
+       db.collection('posts')
         .orderBy('timestamp', 'desc') // append at the top
         .onSnapshot((snapshot) => {
             setPosts(
@@ -34,10 +34,7 @@ const Feed = () => {
                 })
             );
         });
-        return () => {
-            getPosts()
-        }
-    }, [])
+    }, []);
     const sendPost = (e) => {
         e.preventDefault()
         db.collection('posts').add({
